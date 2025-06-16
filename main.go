@@ -1,6 +1,9 @@
 package main
 
 import (
+	"embed"
+	"html/template"
+	"log"
 	"net/http"
 	"shorturl/config"
 	"shorturl/database"
@@ -10,6 +13,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//go:embed templates/*
+var tmplFS embed.FS
+
 func main() {
 	DB := database.InitializeDatabase()
 
@@ -17,7 +23,14 @@ func main() {
 
 	r := gin.Default()
 	// 加载HTML模板
-	r.LoadHTMLGlob("templates/*")
+	// r.LoadHTMLGlob("templates/*")
+	// 嵌入 HTML 模板
+	// 加载模板
+	templ, err := template.ParseFS(tmplFS, "templates/*.html")
+	if err != nil {
+		log.Fatal("模板加载失败:", err)
+	}
+	r.SetHTMLTemplate(templ)
 
 	// 展示首页
 	r.GET("/", func(c *gin.Context) {
