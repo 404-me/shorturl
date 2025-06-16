@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>短链接生成器</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://unpkg.com/htmx.org@2.0.4"
+      integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body
+    class="bg-gray-500 text-gray-200 flex items-center justify-center min-h-screen"
+  >
+    <main class="bg-gray-600 p-8 rounded shadow-md w-full max-w-lg">
+      <h1 class="text-3xl font-bold text-center">{{.title}}</h1>
+      <section class="mt-6 mx-10 flex justify-between items-center">
+        <button
+          hx-get="/shorten"
+          hx-target="#link-form"
+          hx-swap="innerHTML"
+          class="p-4 bg-cyan-900 rounded-sm hover:bg-cyan-950 hover:scale-110 transition-transform duration-300"
+        >
+          短链接生成
+        </button>
+        <button
+          hx-get="/query"
+          hx-target="#link-form"
+          hx-swap="innerHTML"
+          class="p-4 bg-cyan-900 rounded-sm hover:bg-cyan-950 hover:scale-110 transition-transform duration-300"
+        >
+          短链接查询
+        </button>
+      </section>
+      <section id="link-form"></section>
+    </main>
+  </body>
+</html>

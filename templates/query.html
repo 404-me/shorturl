@@ -1,0 +1,48 @@
+<form
+  hx-post="/search"
+  hx-target="#query"
+  hx-swap="outerHTML"
+  id="query"
+  class="mt-8 bg-gray-700 p-6 rounded-lg shadow-lg"
+>
+  <h2 class="text-2xl font-semibold mb-6 text-center text-white">
+    {{ .title }}
+  </h2>
+
+  <div class="mb-5">
+    <label for="short-url" class="block mb-2 text-lg font-medium text-gray-300"
+      >短链接</label
+    >
+    <input
+      type="text"
+      id="short-url"
+      name="short-url"
+      value="{{.shortUrl}}"
+      placeholder="请输入短链接"
+      class="w-full px-4 py-3 rounded-md bg-gray-800 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition"
+    />
+    <div class="text-red-600 text-sm">{{ .url_check }}</div>
+  </div>
+
+  <div class="mb-5">
+    <label for="init-url" class="block mb-2 text-lg font-medium text-gray-300"
+      >原链接</label
+    >
+    <input
+      type="text"
+      id="url"
+      value="{{.url}}"
+      name="init-url"
+      disabled
+      placeholder="原链接"
+      class="w-full px-4 py-3 rounded-md bg-gray-900 text-gray-400"
+    />
+  </div>
+
+  <button
+    type="submit"
+    class=" {{.hidden_class}}w-full py-3 mt-4 bg-cyan-600 hover:bg-cyan-700 rounded-md font-semibold text-white transition-transform transform hover:scale-105"
+  >
+    查询原链接
+  </button>
+</form>
